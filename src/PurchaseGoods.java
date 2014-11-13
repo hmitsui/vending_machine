@@ -1,15 +1,11 @@
-import java.util.HashMap;
 import java.util.Map;
 
 public class PurchaseGoods {
 	
 	public static OtsuriAndGoodsDto purchase(int goodsId) throws Exception {
 		
-		// 引数のIDの商品のストックがあるかをファイルから読み込む
-		Map<String, String> goodsStockMap = new HashMap<String, String>();
-		goodsStockMap = GoodsStockLogic.findAll();
-		
-		// 判定 商品のストックがあるか
+		// 商品のストックがあるか
+		Map<String, String> goodsStockMap = GoodsStockLogic.findAll();
 		if (goodsStockMap.get(Integer.toString(goodsId)) == null) {
 			throw new Exception(Messages.NO_INFO_ABOUT_GOODS);
 		}
@@ -17,17 +13,16 @@ public class PurchaseGoods {
 			throw new Exception(Messages.SOLD_OUT);
 		}
 		
-		// 引数のIDの商品の価格をファイルから読み込む
 		int goodsPrice = GoodsPriceLogic.findPriceById(goodsId);
-		
-		// 判定 投入されているお金は商品価格より上か
 		int totalInsertedMoney = InsertMoney.find();
+		
+		// 投入されているお金は商品価格より上か
 		if (totalInsertedMoney < goodsPrice) {
 			throw new Exception(Messages.LACK_INSERTED_MONEY);
 		}
 		
+		// おつりが出せるか
 		int otsuri = totalInsertedMoney - goodsPrice;
-		// 判定 おつりが出せるか
 		if (!MoneyStockLogic.canGiveOtsuri(otsuri)) {
 			throw new Exception(Messages.LACK_MONEY_STOCK);
 		}
