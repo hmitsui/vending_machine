@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO ファイルは1行にIdと値を1組与える構成に変える。
 public class MoneyStockLogic {
 	
 	public static MoneyStock findAll() throws Exception {

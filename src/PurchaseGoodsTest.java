@@ -8,11 +8,19 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+// TODO パッケージを作る
+
 // 動作確認のためのテスト
 public class PurchaseGoodsTest {
 	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+	
+	// TODO assertEqualsでオブジェクトを比較すると、ポインタが違うというエラーになる。
+	// TODO 呼び出し先を掘っていくとboolean java.lang.Object.equals(Object
+	// obj)メソッドにいっているが…。
+	// assertEquals(expectedOtsuriAndGoodsDto, otsuriAndGoodsDto);
+	// assertThat(otsuriAndGoodsDto, is(expectedOtsuriAndGoodsDto));
 	
 	@Test
 	public void 商品Idが存在しない場合は購入できない() throws Exception {

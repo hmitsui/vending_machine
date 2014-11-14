@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO apache.commons.io.FileUtilsが使える
 public class FileUtil {
 	
 	public static boolean canReadFile(File file) {
