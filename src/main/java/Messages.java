@@ -1,3 +1,5 @@
+package main.java;
+
 public class Messages {
 	public static final String NO_INFO_ABOUT_GOODS = "商品の情報がありません。";
 	public static final String SOLD_OUT = "売り切れです。";

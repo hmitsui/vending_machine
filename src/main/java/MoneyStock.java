@@ -1,3 +1,5 @@
+package main.java;
+
 public class MoneyStock {
 	
 	public int numberOf10yen;

@@ -1,6 +1,11 @@
-import org.junit.Test;
+package test.java;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import main.java.InsertMoney;
+import main.java.MoneyStock;
+import main.java.MoneyStockLogic;
+
+import org.junit.Test;
 
 // 動作確認のためのテスト
 public class InsertMoneyTest {
