@@ -13,7 +13,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 十円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert10yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -22,6 +21,8 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert10yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -40,7 +41,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 五十円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert50yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -49,6 +49,8 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert50yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -67,8 +69,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 百円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert100yen();
-		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
 		moneyStock.numberOf50yen = 3;
@@ -76,6 +76,8 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert100yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -94,7 +96,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 五百円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert500yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -103,6 +104,8 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert500yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -121,7 +124,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 千円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert1000yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -130,6 +132,8 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert1000yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -148,8 +152,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 十円を2つ投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert10yen();
-		InsertMoney.insert10yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -158,6 +160,9 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert10yen();
+		InsertMoney.insert10yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
@@ -176,8 +181,6 @@ public class InsertMoneyTest {
 	@Test
 	public void 十円と五十円を投入する() throws Exception {
 		InsertMoney.update(100);
-		InsertMoney.insert10yen();
-		InsertMoney.insert50yen();
 		
 		MoneyStock moneyStock = new MoneyStock();
 		moneyStock.numberOf10yen = 1;
@@ -186,6 +189,9 @@ public class InsertMoneyTest {
 		moneyStock.numberOf500yen = 7;
 		moneyStock.numberOf1000yen = 9;
 		MoneyStockLogic.update(moneyStock);
+		
+		InsertMoney.insert10yen();
+		InsertMoney.insert50yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
