@@ -1,6 +1,11 @@
 package test.java;
 
 import static org.junit.Assert.*;
+
+import java.io.File;
+
+import main.java.FilePath;
+import main.java.FileUtil;
 import main.java.InsertMoney;
 import main.java.MoneyStock;
 import main.java.MoneyStockLogic;
@@ -36,6 +41,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 110;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -64,6 +72,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 150;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -91,6 +102,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 200;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -119,6 +133,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 600;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -147,6 +164,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 1100;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -176,6 +196,9 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 120;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -205,5 +228,17 @@ public class InsertMoneyTest {
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 160;
 		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
+	}
+	
+	public static void eraseText(String filePath) throws Exception {
+		File file = new File(filePath);
+		
+		if (!FileUtil.canWriteFile(file)) {
+			throw new Exception("ファイルが存在しない、または書き込めません。");
+		}
+		FileUtil.writeFile(file, "");
 	}
 }

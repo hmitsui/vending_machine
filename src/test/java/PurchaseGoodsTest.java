@@ -90,6 +90,11 @@ public class PurchaseGoodsTest {
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			
+			eraseText(FilePath.GOODS_PRICE_FILE);
+			eraseText(FilePath.GODDS_STOCK_FILE);
+			eraseText(FilePath.INSERTED_MONEY_FILE);
+			eraseText(FilePath.MONEY_STOCK_FILE);
 		}
 	}
 	
@@ -149,6 +154,11 @@ public class PurchaseGoodsTest {
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			
+			eraseText(FilePath.GOODS_PRICE_FILE);
+			eraseText(FilePath.GODDS_STOCK_FILE);
+			eraseText(FilePath.INSERTED_MONEY_FILE);
+			eraseText(FilePath.MONEY_STOCK_FILE);
 		}
 	}
 	
@@ -208,6 +218,11 @@ public class PurchaseGoodsTest {
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			
+			eraseText(FilePath.GOODS_PRICE_FILE);
+			eraseText(FilePath.GODDS_STOCK_FILE);
+			eraseText(FilePath.INSERTED_MONEY_FILE);
+			eraseText(FilePath.MONEY_STOCK_FILE);
 		}
 	}
 	
@@ -267,6 +282,11 @@ public class PurchaseGoodsTest {
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			
+			eraseText(FilePath.GOODS_PRICE_FILE);
+			eraseText(FilePath.GODDS_STOCK_FILE);
+			eraseText(FilePath.INSERTED_MONEY_FILE);
+			eraseText(FilePath.MONEY_STOCK_FILE);
 		}
 	}
 	
@@ -327,6 +347,11 @@ public class PurchaseGoodsTest {
 		// 商品価格は変わらない
 		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 		assert goodsPriceMap.equals(actualGoodsPriceMap);
+		
+		eraseText(FilePath.GOODS_PRICE_FILE);
+		eraseText(FilePath.GODDS_STOCK_FILE);
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	@Test
@@ -385,6 +410,11 @@ public class PurchaseGoodsTest {
 		// 商品価格は変わらない
 		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
 		assert goodsPriceMap.equals(actualGoodsPriceMap);
+		
+		eraseText(FilePath.GOODS_PRICE_FILE);
+		eraseText(FilePath.GODDS_STOCK_FILE);
+		eraseText(FilePath.INSERTED_MONEY_FILE);
+		eraseText(FilePath.MONEY_STOCK_FILE);
 	}
 	
 	public static void updateGoodsPrice(Map<String, String> goodsPriceMap) throws Exception {
@@ -406,5 +436,14 @@ public class PurchaseGoodsTest {
 		}
 		
 		FileUtil.writeFile(goodsPriceFile, header, data);
+	}
+	
+	public static void eraseText(String filePath) throws Exception {
+		File file = new File(filePath);
+		
+		if (!FileUtil.canWriteFile(file)) {
+			throw new Exception("ファイルが存在しない、または書き込めません。");
+		}
+		FileUtil.writeFile(file, "");
 	}
 }
