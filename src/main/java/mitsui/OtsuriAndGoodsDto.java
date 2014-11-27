@@ -1,6 +1,8 @@
-package main.java;
+package mitsui;
 
-public class MoneyStock {
+public class OtsuriAndGoodsDto {
+	
+	public int goodsId;
 	
 	public int numberOf10yen;
 	

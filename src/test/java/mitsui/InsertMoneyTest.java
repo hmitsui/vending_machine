@@ -1,14 +1,8 @@
-package test.java;
+package mitsui;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
-
-import main.java.FilePath;
-import main.java.FileUtil;
-import main.java.InsertMoney;
-import main.java.MoneyStock;
-import main.java.MoneyStockLogic;
 
 import org.junit.Test;
 

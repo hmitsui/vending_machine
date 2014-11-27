@@ -1,4 +1,4 @@
-package main.java;
+package mitsui;
 
 public class Messages {
 	public static final String NO_INFO_ABOUT_GOODS = "商品の情報がありません。";

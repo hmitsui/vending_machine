@@ -1,4 +1,4 @@
-package main.java;
+package mitsui;
 
 import java.util.Map;
 
