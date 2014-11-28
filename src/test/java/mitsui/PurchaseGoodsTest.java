@@ -23,8 +23,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-// TODO パッケージを作る
-
 // 動作確認のためのテスト
 public class PurchaseGoodsTest {
 	
@@ -496,14 +494,6 @@ public class PurchaseGoodsTest {
 		FileUtil.writeFile(file, "");
 	}
 	
-	public static void assertMoneyStockEquals(MoneyStockEntity expected, MoneyStockEntity actual) {
-		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
-		assertThat(actual.numberOf50Yen, is(expected.numberOf50Yen));
-		assertThat(actual.numberOf100Yen, is(expected.numberOf100Yen));
-		assertThat(actual.numberOf500Yen, is(expected.numberOf500Yen));
-		assertThat(actual.numberOf1000Yen, is(expected.numberOf1000Yen));
-	}
-	
 	public static void assertOtsuriAndGoodsDtoEquals(OtsuriAndGoodsDto expected, OtsuriAndGoodsDto actual) {
 		assertThat(actual.goodsId, is(expected.goodsId));
 		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
@@ -529,6 +519,14 @@ public class PurchaseGoodsTest {
 			String actualValue = actual.get(Integer.toString(i));
 			assertThat(actualValue, is(expectedValue));
 		}
+	}
+	
+	public static void assertMoneyStockEquals(MoneyStockEntity expected, MoneyStockEntity actual) {
+		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
+		assertThat(actual.numberOf50Yen, is(expected.numberOf50Yen));
+		assertThat(actual.numberOf100Yen, is(expected.numberOf100Yen));
+		assertThat(actual.numberOf500Yen, is(expected.numberOf500Yen));
+		assertThat(actual.numberOf1000Yen, is(expected.numberOf1000Yen));
 	}
 	
 }
