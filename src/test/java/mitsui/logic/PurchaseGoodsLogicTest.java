@@ -1,4 +1,4 @@
-package mitsui;
+package mitsui.logic;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -9,8 +9,6 @@ import java.util.Map;
 
 import mitsui.dto.OtsuriAndGoodsDto;
 import mitsui.entity.MoneyStockEntity;
-import mitsui.logic.InsertMoneyLogic;
-import mitsui.logic.PurchaseGoodsLogic;
 import mitsui.messages.Messages;
 import mitsui.path.FilePath;
 import mitsui.service.GoodsPriceService;
@@ -24,7 +22,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 // 動作確認のためのテスト
-public class PurchaseGoodsTest {
+public class PurchaseGoodsLogicTest {
 	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();

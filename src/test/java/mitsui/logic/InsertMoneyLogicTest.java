@@ -1,4 +1,4 @@
-package mitsui;
+package mitsui.logic;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -15,7 +15,7 @@ import mitsui.util.FileUtil;
 import org.junit.Test;
 
 // 動作確認のためのテスト
-public class InsertMoneyTest {
+public class InsertMoneyLogicTest {
 	
 	@Test
 	public void 十円を投入する() throws Exception {
