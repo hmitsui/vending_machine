@@ -10,7 +10,7 @@ import mitsui.path.FilePath;
 import mitsui.util.FileUtil;
 
 // TODO ファイルは1行にIdと値を1組与える構成に変える。
-public class MoneyStockLogic {
+public class MoneyStockService {
 	
 	public static MoneyStockEntity findAll() throws Exception {
 		
@@ -59,7 +59,7 @@ public class MoneyStockLogic {
 	}
 	
 	public static boolean canGiveOtsuri(int otsuriKingaku) throws Exception {
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		
 		int favoredNumberOf1000Yen = otsuriKingaku / 1000;
 		int otsuriKinkagakuExcept1000Yen;
@@ -126,7 +126,7 @@ public class MoneyStockLogic {
 	}
 	
 	public static OtsuriAndGoodsDto computeNumberOfOtsuri(int otsuriKingaku) throws Exception {
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		int favoredNumberOf1000Yen = otsuriKingaku / 1000;

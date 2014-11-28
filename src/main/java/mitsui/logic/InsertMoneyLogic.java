@@ -4,19 +4,19 @@ import java.io.File;
 
 import mitsui.entity.MoneyStockEntity;
 import mitsui.path.FilePath;
-import mitsui.service.MoneyStockLogic;
+import mitsui.service.MoneyStockService;
 import mitsui.util.FileUtil;
 
-public class InsertMoney {
+public class InsertMoneyLogic {
 	
 	public static void insert10Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 10;
 		update(totalInsertedMoney);
 		
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		moneyStock.numberOf10Yen = moneyStock.numberOf10Yen + 1;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 	}
 	
 	public static void insert50Yen() throws Exception {
@@ -24,9 +24,9 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 50;
 		update(totalInsertedMoney);
 		
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		moneyStock.numberOf50Yen = moneyStock.numberOf50Yen + 1;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 	}
 	
 	public static void insert100Yen() throws Exception {
@@ -34,9 +34,9 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 100;
 		update(totalInsertedMoney);
 		
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		moneyStock.numberOf100Yen = moneyStock.numberOf100Yen + 1;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 	}
 	
 	public static void insert500Yen() throws Exception {
@@ -44,9 +44,9 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 500;
 		update(totalInsertedMoney);
 		
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		moneyStock.numberOf500Yen = moneyStock.numberOf500Yen + 1;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 	}
 	
 	public static void insert1000Yen() throws Exception {
@@ -54,9 +54,9 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 1000;
 		update(totalInsertedMoney);
 		
-		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		moneyStock.numberOf1000Yen = moneyStock.numberOf1000Yen + 1;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 	}
 	
 	public static int find() throws Exception {

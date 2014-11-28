@@ -9,13 +9,13 @@ import java.util.Map;
 
 import mitsui.dto.OtsuriAndGoodsDto;
 import mitsui.entity.MoneyStockEntity;
-import mitsui.logic.InsertMoney;
-import mitsui.logic.PurchaseGoods;
+import mitsui.logic.InsertMoneyLogic;
+import mitsui.logic.PurchaseGoodsLogic;
 import mitsui.messages.Messages;
 import mitsui.path.FilePath;
-import mitsui.service.GoodsPriceLogic;
-import mitsui.service.GoodsStockLogic;
-import mitsui.service.MoneyStockLogic;
+import mitsui.service.GoodsPriceService;
+import mitsui.service.GoodsStockService;
+import mitsui.service.MoneyStockService;
 import mitsui.util.FileUtil;
 
 import org.junit.Rule;
@@ -35,7 +35,7 @@ public class PurchaseGoodsTest {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		goodsStockMap.put("1", "1");
 		goodsStockMap.put("2", "5");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "100");
@@ -48,10 +48,10 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 3;
 		moneyStock.numberOf500Yen = 4;
 		moneyStock.numberOf1000Yen = 5;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert100Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert100Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.NO_INFO_ABOUT_GOODS);
@@ -60,7 +60,7 @@ public class PurchaseGoodsTest {
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(0);
+			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(0);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
@@ -72,7 +72,7 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 1;
 			expectedMoneyStock.numberOf50Yen = 2;
@@ -82,19 +82,19 @@ public class PurchaseGoodsTest {
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
-			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+			Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
 			expectedGoodsStockMap.put("2", "5");
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoney.find();
+			int actualInsertedMoney = InsertMoneyLogic.find();
 			int expectedInsertedMoney = 100;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
-			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+			Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 			expectedGoodsPriceMap.put("1", "100");
 			expectedGoodsPriceMap.put("2", "200");
@@ -111,7 +111,7 @@ public class PurchaseGoodsTest {
 	public void 売り切れ() throws Exception {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		goodsStockMap.put("1", "0");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "100");
@@ -123,10 +123,10 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 0;
 		moneyStock.numberOf500Yen = 0;
 		moneyStock.numberOf1000Yen = 0;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert100Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert100Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.SOLD_OUT);
@@ -135,7 +135,7 @@ public class PurchaseGoodsTest {
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
@@ -147,7 +147,7 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 0;
 			expectedMoneyStock.numberOf50Yen = 0;
@@ -157,18 +157,18 @@ public class PurchaseGoodsTest {
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
-			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+			Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "0");
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoney.find();
+			int actualInsertedMoney = InsertMoneyLogic.find();
 			int expectedInsertedMoney = 100;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
-			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+			Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 			expectedGoodsPriceMap.put("1", "100");
 			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
@@ -184,7 +184,7 @@ public class PurchaseGoodsTest {
 	public void 投入金額が足りない場合は購入できない() throws Exception {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		goodsStockMap.put("1", "1");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "100");
@@ -196,10 +196,10 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 0;
 		moneyStock.numberOf500Yen = 0;
 		moneyStock.numberOf1000Yen = 0;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert10Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert10Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_INSERTED_MONEY);
@@ -208,7 +208,7 @@ public class PurchaseGoodsTest {
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
@@ -220,7 +220,7 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 1;
 			expectedMoneyStock.numberOf50Yen = 0;
@@ -230,18 +230,18 @@ public class PurchaseGoodsTest {
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
-			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+			Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoney.find();
+			int actualInsertedMoney = InsertMoneyLogic.find();
 			int expectedInsertedMoney = 10;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
-			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+			Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 			expectedGoodsPriceMap.put("1", "100");
 			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
@@ -257,7 +257,7 @@ public class PurchaseGoodsTest {
 	public void おつりを出せない() throws Exception {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		goodsStockMap.put("1", "1");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "120");
@@ -269,10 +269,10 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 5;
 		moneyStock.numberOf500Yen = 1;
 		moneyStock.numberOf1000Yen = 0;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert1000Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert1000Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_MONEY_STOCK);
@@ -281,7 +281,7 @@ public class PurchaseGoodsTest {
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
@@ -293,7 +293,7 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 7;
 			expectedMoneyStock.numberOf50Yen = 0;
@@ -303,18 +303,18 @@ public class PurchaseGoodsTest {
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
-			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+			Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoney.find();
+			int actualInsertedMoney = InsertMoneyLogic.find();
 			int expectedInsertedMoney = 1000;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
-			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+			Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 			expectedGoodsPriceMap.put("1", "120");
 			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
@@ -331,7 +331,7 @@ public class PurchaseGoodsTest {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		int goodsId = 1;
 		goodsStockMap.put(Integer.toString(goodsId), "1");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "220");
@@ -343,13 +343,13 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 5;
 		moneyStock.numberOf500Yen = 6;
 		moneyStock.numberOf1000Yen = 0;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert1000Yen();
-		InsertMoney.insert1000Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert1000Yen();
+		InsertMoneyLogic.insert1000Yen();
 		
-		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
 		expectedOtsuriAndGoodsDto.numberOf10Yen = 3;
@@ -362,12 +362,12 @@ public class PurchaseGoodsTest {
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		int actualInsertedMoney = InsertMoney.find();
+		int actualInsertedMoney = InsertMoneyLogic.find();
 		int expectedInsertedMoney = 0;
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
-		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 2;
@@ -377,13 +377,13 @@ public class PurchaseGoodsTest {
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
-		Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+		Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 		Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 		expectedGoodsStockMap.put("1", "0");
 		assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 		
 		// 商品価格は変わらない
-		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+		Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 		Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 		expectedGoodsPriceMap.put("1", "220");
 		assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
@@ -399,7 +399,7 @@ public class PurchaseGoodsTest {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		int goodsId = 1;
 		goodsStockMap.put(Integer.toString(goodsId), "1");
-		GoodsStockLogic.update(goodsStockMap);
+		GoodsStockService.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "220");
@@ -411,12 +411,12 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf100Yen = 6;
 		moneyStock.numberOf500Yen = 0;
 		moneyStock.numberOf1000Yen = 0;
-		MoneyStockLogic.update(moneyStock);
+		MoneyStockService.update(moneyStock);
 		
-		InsertMoney.update(0);
-		InsertMoney.insert1000Yen();
+		InsertMoneyLogic.update(0);
+		InsertMoneyLogic.insert1000Yen();
 		
-		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
 		expectedOtsuriAndGoodsDto.numberOf10Yen = 13;
@@ -429,12 +429,12 @@ public class PurchaseGoodsTest {
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		int actualInsertedMoney = InsertMoney.find();
+		int actualInsertedMoney = InsertMoneyLogic.find();
 		int expectedInsertedMoney = 0;
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
-		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity actualMoneyStock = MoneyStockService.findAll();
 		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 0;
@@ -444,13 +444,13 @@ public class PurchaseGoodsTest {
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
-		Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
+		Map<String, String> actualGoodsStockMap = GoodsStockService.findAll();
 		Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 		expectedGoodsStockMap.put("1", "0");
 		assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 		
 		// 商品価格は変わらない
-		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
+		Map<String, String> actualGoodsPriceMap = GoodsPriceService.findAll();
 		Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
 		expectedGoodsPriceMap.put("1", "220");
 		assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);

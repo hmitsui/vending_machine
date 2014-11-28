@@ -7,7 +7,7 @@ import java.util.Map;
 import mitsui.path.FilePath;
 import mitsui.util.FileUtil;
 
-public class GoodsPriceLogic {
+public class GoodsPriceService {
 	
 	public static Map<String, String> findAll() throws Exception {
 		
