@@ -1,4 +1,4 @@
-package mitsui;
+package mitsui.dto;
 
 public class OtsuriAndGoodsDto {
 	

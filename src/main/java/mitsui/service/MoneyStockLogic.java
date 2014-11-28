@@ -1,13 +1,18 @@
-package mitsui;
+package mitsui.service;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import mitsui.dto.OtsuriAndGoodsDto;
+import mitsui.entity.MoneyStockEntity;
+import mitsui.path.FilePath;
+import mitsui.util.FileUtil;
+
 // TODO ファイルは1行にIdと値を1組与える構成に変える。
 public class MoneyStockLogic {
 	
-	public static MoneyStock findAll() throws Exception {
+	public static MoneyStockEntity findAll() throws Exception {
 		
 		File vendingMachineMoneyFile = new File(FilePath.MONEY_STOCK_FILE);
 		
@@ -26,7 +31,7 @@ public class MoneyStockLogic {
 			moneyStockMap.put(moneyKindArray[i], moneyNumberArray[i]);
 		}
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = Integer.parseInt(moneyStockMap.get("10"));
 		moneyStock.numberOf50Yen = Integer.parseInt(moneyStockMap.get("50"));
 		moneyStock.numberOf100Yen = Integer.parseInt(moneyStockMap.get("100"));
@@ -36,7 +41,7 @@ public class MoneyStockLogic {
 		return moneyStock;
 	}
 	
-	public static void update(MoneyStock moneyStock) throws Exception {
+	public static void update(MoneyStockEntity moneyStock) throws Exception {
 		if (moneyStock == null) {
 			return;
 		}
@@ -54,7 +59,7 @@ public class MoneyStockLogic {
 	}
 	
 	public static boolean canGiveOtsuri(int otsuriKingaku) throws Exception {
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		
 		int favoredNumberOf1000Yen = otsuriKingaku / 1000;
 		int otsuriKinkagakuExcept1000Yen;
@@ -121,7 +126,7 @@ public class MoneyStockLogic {
 	}
 	
 	public static OtsuriAndGoodsDto computeNumberOfOtsuri(int otsuriKingaku) throws Exception {
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		int favoredNumberOf1000Yen = otsuriKingaku / 1000;

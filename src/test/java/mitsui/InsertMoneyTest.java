@@ -5,6 +5,12 @@ import static org.hamcrest.MatcherAssert.*;
 
 import java.io.File;
 
+import mitsui.entity.MoneyStockEntity;
+import mitsui.logic.InsertMoney;
+import mitsui.path.FilePath;
+import mitsui.service.MoneyStockLogic;
+import mitsui.util.FileUtil;
+
 import org.junit.Test;
 
 // 動作確認のためのテスト
@@ -14,7 +20,7 @@ public class InsertMoneyTest {
 	public void 十円を投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -24,8 +30,8 @@ public class InsertMoneyTest {
 		
 		InsertMoney.insert10Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 2;
 		expectedMoneyStock.numberOf50Yen = 3;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -45,7 +51,7 @@ public class InsertMoneyTest {
 	public void 五十円を投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -55,8 +61,8 @@ public class InsertMoneyTest {
 		
 		InsertMoney.insert50Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 4;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -75,7 +81,7 @@ public class InsertMoneyTest {
 	@Test
 	public void 百円を投入する() throws Exception {
 		InsertMoney.update(100);
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -85,8 +91,8 @@ public class InsertMoneyTest {
 		
 		InsertMoney.insert100Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 3;
 		expectedMoneyStock.numberOf100Yen = 6;
@@ -106,7 +112,7 @@ public class InsertMoneyTest {
 	public void 五百円を投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -116,8 +122,8 @@ public class InsertMoneyTest {
 		
 		InsertMoney.insert500Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 3;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -137,7 +143,7 @@ public class InsertMoneyTest {
 	public void 千円を投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -147,8 +153,8 @@ public class InsertMoneyTest {
 		
 		InsertMoney.insert1000Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 3;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -168,7 +174,7 @@ public class InsertMoneyTest {
 	public void 十円を2つ投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -179,8 +185,8 @@ public class InsertMoneyTest {
 		InsertMoney.insert10Yen();
 		InsertMoney.insert10Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 3;
 		expectedMoneyStock.numberOf50Yen = 3;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -200,7 +206,7 @@ public class InsertMoneyTest {
 	public void 十円と五十円を投入する() throws Exception {
 		InsertMoney.update(100);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -211,8 +217,8 @@ public class InsertMoneyTest {
 		InsertMoney.insert10Yen();
 		InsertMoney.insert50Yen();
 		
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 2;
 		expectedMoneyStock.numberOf50Yen = 4;
 		expectedMoneyStock.numberOf100Yen = 5;
@@ -237,7 +243,7 @@ public class InsertMoneyTest {
 		FileUtil.writeFile(file, "");
 	}
 	
-	public static void assertMoneyStockEquals(MoneyStock expectedMoneyStock, MoneyStock actualMoneyStock) {
+	public static void assertMoneyStockEquals(MoneyStockEntity expectedMoneyStock, MoneyStockEntity actualMoneyStock) {
 		assertThat(actualMoneyStock.numberOf10Yen, is(expectedMoneyStock.numberOf10Yen));
 		assertThat(actualMoneyStock.numberOf50Yen, is(expectedMoneyStock.numberOf50Yen));
 		assertThat(actualMoneyStock.numberOf100Yen, is(expectedMoneyStock.numberOf100Yen));

@@ -1,6 +1,6 @@
-package mitsui;
+package mitsui.entity;
 
-public class MoneyStock {
+public class MoneyStockEntity {
 	
 	public int numberOf10Yen;
 	

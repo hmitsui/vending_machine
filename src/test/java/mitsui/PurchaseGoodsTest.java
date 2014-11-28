@@ -7,6 +7,17 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import mitsui.dto.OtsuriAndGoodsDto;
+import mitsui.entity.MoneyStockEntity;
+import mitsui.logic.InsertMoney;
+import mitsui.logic.PurchaseGoods;
+import mitsui.messages.Messages;
+import mitsui.path.FilePath;
+import mitsui.service.GoodsPriceLogic;
+import mitsui.service.GoodsStockLogic;
+import mitsui.service.MoneyStockLogic;
+import mitsui.util.FileUtil;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,7 +42,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("2", "200");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 1;
 		moneyStock.numberOf50Yen = 2;
 		moneyStock.numberOf100Yen = 3;
@@ -61,8 +72,8 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-			MoneyStock expectedMoneyStock = new MoneyStock();
+			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 1;
 			expectedMoneyStock.numberOf50Yen = 2;
 			expectedMoneyStock.numberOf100Yen = 4;
@@ -106,7 +117,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("1", "100");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 0;
 		moneyStock.numberOf50Yen = 0;
 		moneyStock.numberOf100Yen = 0;
@@ -136,8 +147,8 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-			MoneyStock expectedMoneyStock = new MoneyStock();
+			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 0;
 			expectedMoneyStock.numberOf50Yen = 0;
 			expectedMoneyStock.numberOf100Yen = 1;
@@ -179,7 +190,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("1", "100");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 0;
 		moneyStock.numberOf50Yen = 0;
 		moneyStock.numberOf100Yen = 0;
@@ -209,8 +220,8 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-			MoneyStock expectedMoneyStock = new MoneyStock();
+			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 1;
 			expectedMoneyStock.numberOf50Yen = 0;
 			expectedMoneyStock.numberOf100Yen = 0;
@@ -252,7 +263,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("1", "120");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 7;
 		moneyStock.numberOf50Yen = 0;
 		moneyStock.numberOf100Yen = 5;
@@ -282,8 +293,8 @@ public class PurchaseGoodsTest {
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
-			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-			MoneyStock expectedMoneyStock = new MoneyStock();
+			MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+			MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 			expectedMoneyStock.numberOf10Yen = 7;
 			expectedMoneyStock.numberOf50Yen = 0;
 			expectedMoneyStock.numberOf100Yen = 5;
@@ -326,7 +337,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("1", "220");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 4;
 		moneyStock.numberOf50Yen = 3;
 		moneyStock.numberOf100Yen = 5;
@@ -356,8 +367,8 @@ public class PurchaseGoodsTest {
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 2;
 		expectedMoneyStock.numberOf100Yen = 3;
@@ -394,7 +405,7 @@ public class PurchaseGoodsTest {
 		goodsPriceMap.put("1", "220");
 		updateGoodsPrice(goodsPriceMap);
 		
-		MoneyStock moneyStock = new MoneyStock();
+		MoneyStockEntity moneyStock = new MoneyStockEntity();
 		moneyStock.numberOf10Yen = 14;
 		moneyStock.numberOf50Yen = 1;
 		moneyStock.numberOf100Yen = 6;
@@ -423,8 +434,8 @@ public class PurchaseGoodsTest {
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
-		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
-		MoneyStock expectedMoneyStock = new MoneyStock();
+		MoneyStockEntity actualMoneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity expectedMoneyStock = new MoneyStockEntity();
 		expectedMoneyStock.numberOf10Yen = 1;
 		expectedMoneyStock.numberOf50Yen = 0;
 		expectedMoneyStock.numberOf100Yen = 0;
@@ -480,7 +491,7 @@ public class PurchaseGoodsTest {
 		FileUtil.writeFile(file, "");
 	}
 	
-	public static void assertMoneyStockEquals(MoneyStock expected, MoneyStock actual) {
+	public static void assertMoneyStockEquals(MoneyStockEntity expected, MoneyStockEntity actual) {
 		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
 		assertThat(actual.numberOf50Yen, is(expected.numberOf50Yen));
 		assertThat(actual.numberOf100Yen, is(expected.numberOf100Yen));

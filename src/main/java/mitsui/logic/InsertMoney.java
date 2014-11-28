@@ -1,6 +1,11 @@
-package mitsui;
+package mitsui.logic;
 
 import java.io.File;
+
+import mitsui.entity.MoneyStockEntity;
+import mitsui.path.FilePath;
+import mitsui.service.MoneyStockLogic;
+import mitsui.util.FileUtil;
 
 public class InsertMoney {
 	
@@ -9,7 +14,7 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 10;
 		update(totalInsertedMoney);
 		
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf10Yen = moneyStock.numberOf10Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
@@ -19,7 +24,7 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 50;
 		update(totalInsertedMoney);
 		
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf50Yen = moneyStock.numberOf50Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
@@ -29,7 +34,7 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 100;
 		update(totalInsertedMoney);
 		
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf100Yen = moneyStock.numberOf100Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
@@ -39,7 +44,7 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 500;
 		update(totalInsertedMoney);
 		
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf500Yen = moneyStock.numberOf500Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
@@ -49,7 +54,7 @@ public class InsertMoney {
 		int totalInsertedMoney = alreadyInsertedMoney + 1000;
 		update(totalInsertedMoney);
 		
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf1000Yen = moneyStock.numberOf1000Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}

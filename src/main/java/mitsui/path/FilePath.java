@@ -1,4 +1,4 @@
-package mitsui;
+package mitsui.path;
 
 public class FilePath {
 	public static final String INSERTED_MONEY_FILE = "src/main/resources/mitsui/inserted_money.txt";

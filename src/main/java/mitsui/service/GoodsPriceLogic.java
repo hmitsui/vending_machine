@@ -1,8 +1,11 @@
-package mitsui;
+package mitsui.service;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import mitsui.path.FilePath;
+import mitsui.util.FileUtil;
 
 public class GoodsPriceLogic {
 	

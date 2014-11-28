@@ -1,6 +1,13 @@
-package mitsui;
+package mitsui.logic;
 
 import java.util.Map;
+
+import mitsui.dto.OtsuriAndGoodsDto;
+import mitsui.entity.MoneyStockEntity;
+import mitsui.messages.Messages;
+import mitsui.service.GoodsPriceLogic;
+import mitsui.service.GoodsStockLogic;
+import mitsui.service.MoneyStockLogic;
 
 public class PurchaseGoods {
 	
@@ -43,7 +50,7 @@ public class PurchaseGoods {
 		purchaseDto.goodsId = goodsId;
 		
 		// 自動販売機内のお金の枚数が変わる
-		MoneyStock moneyStock = MoneyStockLogic.findAll();
+		MoneyStockEntity moneyStock = MoneyStockLogic.findAll();
 		moneyStock.numberOf10Yen = moneyStock.numberOf10Yen - purchaseDto.numberOf10Yen;
 		moneyStock.numberOf50Yen = moneyStock.numberOf50Yen - purchaseDto.numberOf50Yen;
 		moneyStock.numberOf100Yen = moneyStock.numberOf100Yen - purchaseDto.numberOf100Yen;
