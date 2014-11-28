@@ -15,6 +15,7 @@ import mitsui.messages.Messages;
 import mitsui.path.FilePath;
 import mitsui.service.GoodsPriceService;
 import mitsui.service.GoodsStockService;
+import mitsui.service.InsertedMoneyService;
 import mitsui.service.MoneyStockService;
 import mitsui.util.FileUtil;
 
@@ -50,7 +51,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 5;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert100Yen();
 		
 		expectedException.expect(Exception.class);
@@ -89,7 +90,7 @@ public class PurchaseGoodsTest {
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoneyLogic.find();
+			int actualInsertedMoney = InsertedMoneyService.find();
 			int expectedInsertedMoney = 100;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
@@ -125,7 +126,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 0;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert100Yen();
 		
 		expectedException.expect(Exception.class);
@@ -163,7 +164,7 @@ public class PurchaseGoodsTest {
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoneyLogic.find();
+			int actualInsertedMoney = InsertedMoneyService.find();
 			int expectedInsertedMoney = 100;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
@@ -198,7 +199,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 0;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert10Yen();
 		
 		expectedException.expect(Exception.class);
@@ -236,7 +237,7 @@ public class PurchaseGoodsTest {
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoneyLogic.find();
+			int actualInsertedMoney = InsertedMoneyService.find();
 			int expectedInsertedMoney = 10;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
@@ -271,7 +272,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 0;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert1000Yen();
 		
 		expectedException.expect(Exception.class);
@@ -309,7 +310,7 @@ public class PurchaseGoodsTest {
 			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
-			int actualInsertedMoney = InsertMoneyLogic.find();
+			int actualInsertedMoney = InsertedMoneyService.find();
 			int expectedInsertedMoney = 1000;
 			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
@@ -345,7 +346,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 0;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert1000Yen();
 		InsertMoneyLogic.insert1000Yen();
 		
@@ -362,7 +363,7 @@ public class PurchaseGoodsTest {
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		int actualInsertedMoney = InsertMoneyLogic.find();
+		int actualInsertedMoney = InsertedMoneyService.find();
 		int expectedInsertedMoney = 0;
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
@@ -413,7 +414,7 @@ public class PurchaseGoodsTest {
 		moneyStock.numberOf1000Yen = 0;
 		MoneyStockService.update(moneyStock);
 		
-		InsertMoneyLogic.update(0);
+		InsertedMoneyService.update(0);
 		InsertMoneyLogic.insert1000Yen();
 		
 		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
@@ -429,7 +430,7 @@ public class PurchaseGoodsTest {
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		int actualInsertedMoney = InsertMoneyLogic.find();
+		int actualInsertedMoney = InsertedMoneyService.find();
 		int expectedInsertedMoney = 0;
 		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
