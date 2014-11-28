@@ -30,7 +30,7 @@ public class InsertMoney {
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf10yen = moneyStock.numberOf100yen + 1;
+		moneyStock.numberOf100yen = moneyStock.numberOf100yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	

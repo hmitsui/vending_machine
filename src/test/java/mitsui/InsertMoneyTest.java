@@ -1,6 +1,7 @@
 package mitsui;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 import java.io.File;
 
@@ -30,11 +31,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 110;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -61,11 +62,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 150;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -91,11 +92,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 6;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 200;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -122,11 +123,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 8;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 600;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -153,11 +154,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 10;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 1100;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -185,11 +186,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 120;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -217,11 +218,11 @@ public class InsertMoneyTest {
 		expectedMoneyStock.numberOf100yen = 5;
 		expectedMoneyStock.numberOf500yen = 7;
 		expectedMoneyStock.numberOf1000yen = 9;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
 		int expectedInsertedMoney = 160;
-		assertEquals(expectedInsertedMoney, actualInsertedMoney);
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		eraseText(FilePath.INSERTED_MONEY_FILE);
 		eraseText(FilePath.MONEY_STOCK_FILE);
@@ -234,5 +235,13 @@ public class InsertMoneyTest {
 			throw new Exception("ファイルが存在しない、または書き込めません。");
 		}
 		FileUtil.writeFile(file, "");
+	}
+	
+	public static void assertMoneyStockEquals(MoneyStock expectedMoneyStock, MoneyStock actualMoneyStock) {
+		assertThat(actualMoneyStock.numberOf10yen, is(expectedMoneyStock.numberOf10yen));
+		assertThat(actualMoneyStock.numberOf50yen, is(expectedMoneyStock.numberOf50yen));
+		assertThat(actualMoneyStock.numberOf100yen, is(expectedMoneyStock.numberOf100yen));
+		assertThat(actualMoneyStock.numberOf500yen, is(expectedMoneyStock.numberOf500yen));
+		assertThat(actualMoneyStock.numberOf1000yen, is(expectedMoneyStock.numberOf1000yen));
 	}
 }

@@ -32,6 +32,7 @@ public class PurchaseGoods {
 		// 商品のストックが1減る
 		int goodsStock = Integer.parseInt(goodsStockMap.get(Integer.toString(goodsId)));
 		goodsStockMap.put(Integer.toString(goodsId), Integer.toString(goodsStock - 1));
+		GoodsStockLogic.update(goodsStockMap);
 		
 		// 投入金額が0になる
 		InsertMoney.update(0);
@@ -48,6 +49,8 @@ public class PurchaseGoods {
 		moneyStock.numberOf100yen = moneyStock.numberOf100yen - purchaseDto.numberOf100yen;
 		moneyStock.numberOf500yen = moneyStock.numberOf500yen - purchaseDto.numberOf500yen;
 		moneyStock.numberOf1000yen = moneyStock.numberOf1000yen - purchaseDto.numberOf1000yen;
+		
+		MoneyStockLogic.update(moneyStock);
 		
 		return purchaseDto;
 	}

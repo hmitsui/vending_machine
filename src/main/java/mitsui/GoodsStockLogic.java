@@ -37,7 +37,7 @@ public class GoodsStockLogic {
 		
 		String header = "1";
 		String data = goodsStockMap.get("1");
-		for (int i = 2; i < goodsStockMap.size(); i++) {
+		for (int i = 2; i <= goodsStockMap.size(); i++) {
 			header = header + "," + Integer.toString(i);
 			data = data + "," + goodsStockMap.get(Integer.toString(i));
 		}

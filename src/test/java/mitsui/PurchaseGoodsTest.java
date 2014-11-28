@@ -1,6 +1,7 @@
 package mitsui;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -18,20 +19,16 @@ public class PurchaseGoodsTest {
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 	
-	// TODO assertEqualsでオブジェクトを比較すると、ポインタが違うというエラーになる。
-	// TODO 呼び出し先を掘っていくとboolean java.lang.Object.equals(Object
-	// obj)メソッドにいっているが…。
-	// assertEquals(expectedOtsuriAndGoodsDto, otsuriAndGoodsDto);
-	// assertThat(otsuriAndGoodsDto, is(expectedOtsuriAndGoodsDto));
-	
 	@Test
 	public void 商品Idが存在しない場合は購入できない() throws Exception {
 		Map<String, String> goodsStockMap = new HashMap<String, String>();
 		goodsStockMap.put("1", "1");
+		goodsStockMap.put("2", "5");
 		GoodsStockLogic.update(goodsStockMap);
 		
 		Map<String, String> goodsPriceMap = new HashMap<String, String>();
 		goodsPriceMap.put("1", "100");
+		goodsPriceMap.put("2", "200");
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
@@ -48,12 +45,20 @@ public class PurchaseGoodsTest {
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.NO_INFO_ABOUT_GOODS);
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		
 		try {
-			otsuriAndGoodsDto = PurchaseGoods.purchase(0);
+			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(0);
+			expectedOtsuriAndGoodsDto.goodsId = 0;
+			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
 		} finally {
 			// おつりと商品は得られない
-			assert otsuriAndGoodsDto == null;
+			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
@@ -63,22 +68,26 @@ public class PurchaseGoodsTest {
 			expectedMoneyStock.numberOf100yen = 4;
 			expectedMoneyStock.numberOf500yen = 4;
 			expectedMoneyStock.numberOf1000yen = 5;
-			assert expectedMoneyStock.equals(actualMoneyStock);
+			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
 			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
-			assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+			expectedGoodsStockMap.put("2", "5");
+			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
 			int actualInsertedMoney = InsertMoney.find();
 			int expectedInsertedMoney = 100;
-			assertEquals(expectedInsertedMoney, actualInsertedMoney);
+			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+			expectedGoodsPriceMap.put("1", "100");
+			expectedGoodsPriceMap.put("2", "200");
+			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 			
 			eraseText(FilePath.GOODS_PRICE_FILE);
 			eraseText(FilePath.GODDS_STOCK_FILE);
@@ -111,13 +120,20 @@ public class PurchaseGoodsTest {
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.SOLD_OUT);
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			otsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			expectedOtsuriAndGoodsDto.goodsId = 0;
+			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
 		} finally {
 			// おつりと商品は得られない
-			assert otsuriAndGoodsDto == null;
+			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
@@ -127,22 +143,24 @@ public class PurchaseGoodsTest {
 			expectedMoneyStock.numberOf100yen = 1;
 			expectedMoneyStock.numberOf500yen = 0;
 			expectedMoneyStock.numberOf1000yen = 0;
-			assert expectedMoneyStock.equals(actualMoneyStock);
+			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
 			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "0");
-			assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
 			int actualInsertedMoney = InsertMoney.find();
 			int expectedInsertedMoney = 100;
-			assertEquals(expectedInsertedMoney, actualInsertedMoney);
+			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+			expectedGoodsPriceMap.put("1", "100");
+			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 			
 			eraseText(FilePath.GOODS_PRICE_FILE);
 			eraseText(FilePath.GODDS_STOCK_FILE);
@@ -175,13 +193,20 @@ public class PurchaseGoodsTest {
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_INSERTED_MONEY);
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			otsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			expectedOtsuriAndGoodsDto.goodsId = 0;
+			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
 		} finally {
 			// おつりと商品は得られない
-			assert otsuriAndGoodsDto == null;
+			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
@@ -191,22 +216,24 @@ public class PurchaseGoodsTest {
 			expectedMoneyStock.numberOf100yen = 0;
 			expectedMoneyStock.numberOf500yen = 0;
 			expectedMoneyStock.numberOf1000yen = 0;
-			assert expectedMoneyStock.equals(actualMoneyStock);
+			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
 			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
-			assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
 			int actualInsertedMoney = InsertMoney.find();
 			int expectedInsertedMoney = 10;
-			assertEquals(expectedInsertedMoney, actualInsertedMoney);
+			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+			expectedGoodsPriceMap.put("1", "100");
+			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 			
 			eraseText(FilePath.GOODS_PRICE_FILE);
 			eraseText(FilePath.GODDS_STOCK_FILE);
@@ -239,13 +266,20 @@ public class PurchaseGoodsTest {
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_MONEY_STOCK);
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
+		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
 		try {
-			otsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
+			expectedOtsuriAndGoodsDto.goodsId = 0;
+			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
 		} finally {
 			// おつりと商品は得られない
-			assert otsuriAndGoodsDto == null;
+			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
@@ -255,22 +289,24 @@ public class PurchaseGoodsTest {
 			expectedMoneyStock.numberOf100yen = 5;
 			expectedMoneyStock.numberOf500yen = 1;
 			expectedMoneyStock.numberOf1000yen = 1;
-			assert expectedMoneyStock.equals(actualMoneyStock);
+			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
 			Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 			Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 			expectedGoodsStockMap.put("1", "1");
-			assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+			assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 			
 			// 投入されたお金の金額は変わらない
 			int actualInsertedMoney = InsertMoney.find();
 			int expectedInsertedMoney = 1000;
-			assertEquals(expectedInsertedMoney, actualInsertedMoney);
+			assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 			
 			// 商品価格は変わらない
 			Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-			assert goodsPriceMap.equals(actualGoodsPriceMap);
+			Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+			expectedGoodsPriceMap.put("1", "120");
+			assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 			
 			eraseText(FilePath.GOODS_PRICE_FILE);
 			eraseText(FilePath.GODDS_STOCK_FILE);
@@ -302,7 +338,7 @@ public class PurchaseGoodsTest {
 		InsertMoney.insert1000yen();
 		InsertMoney.insert1000yen();
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = PurchaseGoods.purchase(1);
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
 		expectedOtsuriAndGoodsDto.numberOf10yen = 3;
@@ -312,10 +348,12 @@ public class PurchaseGoodsTest {
 		expectedOtsuriAndGoodsDto.numberOf1000yen = 1;
 		
 		// おつりと商品が得られる
-		assert expectedOtsuriAndGoodsDto.equals(otsuriAndGoodsDto);
+		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		assertEquals(0, InsertMoney.find());
+		int actualInsertedMoney = InsertMoney.find();
+		int expectedInsertedMoney = 0;
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
@@ -325,17 +363,19 @@ public class PurchaseGoodsTest {
 		expectedMoneyStock.numberOf100yen = 3;
 		expectedMoneyStock.numberOf500yen = 5;
 		expectedMoneyStock.numberOf1000yen = 1;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
 		Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 		Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 		expectedGoodsStockMap.put("1", "0");
-		assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+		assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 		
 		// 商品価格は変わらない
 		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-		assert goodsPriceMap.equals(actualGoodsPriceMap);
+		Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+		expectedGoodsPriceMap.put("1", "220");
+		assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 		
 		eraseText(FilePath.GOODS_PRICE_FILE);
 		eraseText(FilePath.GODDS_STOCK_FILE);
@@ -365,7 +405,7 @@ public class PurchaseGoodsTest {
 		InsertMoney.update(0);
 		InsertMoney.insert1000yen();
 		
-		OtsuriAndGoodsDto otsuriAndGoodsDto = PurchaseGoods.purchase(1);
+		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
 		expectedOtsuriAndGoodsDto.numberOf10yen = 13;
@@ -375,30 +415,34 @@ public class PurchaseGoodsTest {
 		expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
 		
 		// おつりと商品が得られる
-		assert expectedOtsuriAndGoodsDto.equals(otsuriAndGoodsDto);
+		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 		
 		// 投入されたお金が0になる
-		assertEquals(0, InsertMoney.find());
+		int actualInsertedMoney = InsertMoney.find();
+		int expectedInsertedMoney = 0;
+		assertThat(actualInsertedMoney, is(expectedInsertedMoney));
 		
 		// お金のストックの枚数が変わる
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
 		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 2;
-		expectedMoneyStock.numberOf100yen = 3;
-		expectedMoneyStock.numberOf500yen = 5;
+		expectedMoneyStock.numberOf50yen = 0;
+		expectedMoneyStock.numberOf100yen = 0;
+		expectedMoneyStock.numberOf500yen = 0;
 		expectedMoneyStock.numberOf1000yen = 1;
-		assert expectedMoneyStock.equals(actualMoneyStock);
+		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
 		Map<String, String> actualGoodsStockMap = GoodsStockLogic.findAll();
 		Map<String, String> expectedGoodsStockMap = new HashMap<String, String>();
 		expectedGoodsStockMap.put("1", "0");
-		assert expectedGoodsStockMap.equals(actualGoodsStockMap);
+		assertGoodsStockMapEquals(expectedGoodsStockMap, actualGoodsStockMap);
 		
 		// 商品価格は変わらない
 		Map<String, String> actualGoodsPriceMap = GoodsPriceLogic.findAll();
-		assert goodsPriceMap.equals(actualGoodsPriceMap);
+		Map<String, String> expectedGoodsPriceMap = new HashMap<String, String>();
+		expectedGoodsPriceMap.put("1", "220");
+		assertGoodsPriceMapEquals(expectedGoodsPriceMap, actualGoodsPriceMap);
 		
 		eraseText(FilePath.GOODS_PRICE_FILE);
 		eraseText(FilePath.GODDS_STOCK_FILE);
@@ -435,4 +479,40 @@ public class PurchaseGoodsTest {
 		}
 		FileUtil.writeFile(file, "");
 	}
+	
+	public static void assertMoneyStockEquals(MoneyStock expected, MoneyStock actual) {
+		assertThat(actual.numberOf10yen, is(expected.numberOf10yen));
+		assertThat(actual.numberOf50yen, is(expected.numberOf50yen));
+		assertThat(actual.numberOf100yen, is(expected.numberOf100yen));
+		assertThat(actual.numberOf500yen, is(expected.numberOf500yen));
+		assertThat(actual.numberOf1000yen, is(expected.numberOf1000yen));
+	}
+	
+	public static void assertOtsuriAndGoodsDtoEquals(OtsuriAndGoodsDto expected, OtsuriAndGoodsDto actual) {
+		assertThat(actual.goodsId, is(expected.goodsId));
+		assertThat(actual.numberOf10yen, is(expected.numberOf10yen));
+		assertThat(actual.numberOf50yen, is(expected.numberOf50yen));
+		assertThat(actual.numberOf100yen, is(expected.numberOf100yen));
+		assertThat(actual.numberOf500yen, is(expected.numberOf500yen));
+		assertThat(actual.numberOf1000yen, is(expected.numberOf1000yen));
+	}
+	
+	public static void assertGoodsStockMapEquals(Map<String, String> expected, Map<String, String> actual) {
+		assertThat(actual.size(), is(expected.size()));
+		for (int i = 1; i <= expected.size(); i++) {
+			String expectedValue = expected.get(Integer.toString(i));
+			String actualValue = actual.get(Integer.toString(i));
+			assertThat(actualValue, is(expectedValue));
+		}
+	}
+	
+	public static void assertGoodsPriceMapEquals(Map<String, String> expected, Map<String, String> actual) {
+		assertThat(actual.size(), is(expected.size()));
+		for (int i = 1; i <= expected.size(); i++) {
+			String expectedValue = expected.get(Integer.toString(i));
+			String actualValue = actual.get(Integer.toString(i));
+			assertThat(actualValue, is(expectedValue));
+		}
+	}
+	
 }
