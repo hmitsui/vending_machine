@@ -32,15 +32,15 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 2;
-		moneyStock.numberOf100yen = 3;
-		moneyStock.numberOf500yen = 4;
-		moneyStock.numberOf1000yen = 5;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 2;
+		moneyStock.numberOf100Yen = 3;
+		moneyStock.numberOf500Yen = 4;
+		moneyStock.numberOf1000Yen = 5;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert100yen();
+		InsertMoney.insert100Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.NO_INFO_ABOUT_GOODS);
@@ -51,11 +51,11 @@ public class PurchaseGoodsTest {
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(0);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
-			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
 		} finally {
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -63,11 +63,11 @@ public class PurchaseGoodsTest {
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 			MoneyStock expectedMoneyStock = new MoneyStock();
-			expectedMoneyStock.numberOf10yen = 1;
-			expectedMoneyStock.numberOf50yen = 2;
-			expectedMoneyStock.numberOf100yen = 4;
-			expectedMoneyStock.numberOf500yen = 4;
-			expectedMoneyStock.numberOf1000yen = 5;
+			expectedMoneyStock.numberOf10Yen = 1;
+			expectedMoneyStock.numberOf50Yen = 2;
+			expectedMoneyStock.numberOf100Yen = 4;
+			expectedMoneyStock.numberOf500Yen = 4;
+			expectedMoneyStock.numberOf1000Yen = 5;
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
@@ -107,15 +107,15 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 0;
-		moneyStock.numberOf50yen = 0;
-		moneyStock.numberOf100yen = 0;
-		moneyStock.numberOf500yen = 0;
-		moneyStock.numberOf1000yen = 0;
+		moneyStock.numberOf10Yen = 0;
+		moneyStock.numberOf50Yen = 0;
+		moneyStock.numberOf100Yen = 0;
+		moneyStock.numberOf500Yen = 0;
+		moneyStock.numberOf1000Yen = 0;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert100yen();
+		InsertMoney.insert100Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.SOLD_OUT);
@@ -126,11 +126,11 @@ public class PurchaseGoodsTest {
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
-			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
 		} finally {
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -138,11 +138,11 @@ public class PurchaseGoodsTest {
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 			MoneyStock expectedMoneyStock = new MoneyStock();
-			expectedMoneyStock.numberOf10yen = 0;
-			expectedMoneyStock.numberOf50yen = 0;
-			expectedMoneyStock.numberOf100yen = 1;
-			expectedMoneyStock.numberOf500yen = 0;
-			expectedMoneyStock.numberOf1000yen = 0;
+			expectedMoneyStock.numberOf10Yen = 0;
+			expectedMoneyStock.numberOf50Yen = 0;
+			expectedMoneyStock.numberOf100Yen = 1;
+			expectedMoneyStock.numberOf500Yen = 0;
+			expectedMoneyStock.numberOf1000Yen = 0;
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
@@ -180,15 +180,15 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 0;
-		moneyStock.numberOf50yen = 0;
-		moneyStock.numberOf100yen = 0;
-		moneyStock.numberOf500yen = 0;
-		moneyStock.numberOf1000yen = 0;
+		moneyStock.numberOf10Yen = 0;
+		moneyStock.numberOf50Yen = 0;
+		moneyStock.numberOf100Yen = 0;
+		moneyStock.numberOf500Yen = 0;
+		moneyStock.numberOf1000Yen = 0;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert10yen();
+		InsertMoney.insert10Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_INSERTED_MONEY);
@@ -199,11 +199,11 @@ public class PurchaseGoodsTest {
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
-			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
 		} finally {
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -211,11 +211,11 @@ public class PurchaseGoodsTest {
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 			MoneyStock expectedMoneyStock = new MoneyStock();
-			expectedMoneyStock.numberOf10yen = 1;
-			expectedMoneyStock.numberOf50yen = 0;
-			expectedMoneyStock.numberOf100yen = 0;
-			expectedMoneyStock.numberOf500yen = 0;
-			expectedMoneyStock.numberOf1000yen = 0;
+			expectedMoneyStock.numberOf10Yen = 1;
+			expectedMoneyStock.numberOf50Yen = 0;
+			expectedMoneyStock.numberOf100Yen = 0;
+			expectedMoneyStock.numberOf500Yen = 0;
+			expectedMoneyStock.numberOf1000Yen = 0;
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
@@ -253,15 +253,15 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 7;
-		moneyStock.numberOf50yen = 0;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 1;
-		moneyStock.numberOf1000yen = 0;
+		moneyStock.numberOf10Yen = 7;
+		moneyStock.numberOf50Yen = 0;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 1;
+		moneyStock.numberOf1000Yen = 0;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert1000yen();
+		InsertMoney.insert1000Yen();
 		
 		expectedException.expect(Exception.class);
 		expectedException.expectMessage(Messages.LACK_MONEY_STOCK);
@@ -272,11 +272,11 @@ public class PurchaseGoodsTest {
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 			expectedOtsuriAndGoodsDto.goodsId = 0;
-			expectedOtsuriAndGoodsDto.numberOf10yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf50yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf100yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf500yen = 0;
-			expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
+			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
 		} finally {
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -284,11 +284,11 @@ public class PurchaseGoodsTest {
 			// お金のストックは変わらない
 			MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 			MoneyStock expectedMoneyStock = new MoneyStock();
-			expectedMoneyStock.numberOf10yen = 7;
-			expectedMoneyStock.numberOf50yen = 0;
-			expectedMoneyStock.numberOf100yen = 5;
-			expectedMoneyStock.numberOf500yen = 1;
-			expectedMoneyStock.numberOf1000yen = 1;
+			expectedMoneyStock.numberOf10Yen = 7;
+			expectedMoneyStock.numberOf50Yen = 0;
+			expectedMoneyStock.numberOf100Yen = 5;
+			expectedMoneyStock.numberOf500Yen = 1;
+			expectedMoneyStock.numberOf1000Yen = 1;
 			assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 			
 			// 商品のストックは変わらない
@@ -327,25 +327,25 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 4;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 6;
-		moneyStock.numberOf1000yen = 0;
+		moneyStock.numberOf10Yen = 4;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 6;
+		moneyStock.numberOf1000Yen = 0;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert1000yen();
-		InsertMoney.insert1000yen();
+		InsertMoney.insert1000Yen();
+		InsertMoney.insert1000Yen();
 		
 		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
-		expectedOtsuriAndGoodsDto.numberOf10yen = 3;
-		expectedOtsuriAndGoodsDto.numberOf50yen = 1;
-		expectedOtsuriAndGoodsDto.numberOf100yen = 2;
-		expectedOtsuriAndGoodsDto.numberOf500yen = 1;
-		expectedOtsuriAndGoodsDto.numberOf1000yen = 1;
+		expectedOtsuriAndGoodsDto.numberOf10Yen = 3;
+		expectedOtsuriAndGoodsDto.numberOf50Yen = 1;
+		expectedOtsuriAndGoodsDto.numberOf100Yen = 2;
+		expectedOtsuriAndGoodsDto.numberOf500Yen = 1;
+		expectedOtsuriAndGoodsDto.numberOf1000Yen = 1;
 		
 		// おつりと商品が得られる
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -358,11 +358,11 @@ public class PurchaseGoodsTest {
 		// お金のストックの枚数が変わる
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 2;
-		expectedMoneyStock.numberOf100yen = 3;
-		expectedMoneyStock.numberOf500yen = 5;
-		expectedMoneyStock.numberOf1000yen = 1;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 2;
+		expectedMoneyStock.numberOf100Yen = 3;
+		expectedMoneyStock.numberOf500Yen = 5;
+		expectedMoneyStock.numberOf1000Yen = 1;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
@@ -395,24 +395,24 @@ public class PurchaseGoodsTest {
 		updateGoodsPrice(goodsPriceMap);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 14;
-		moneyStock.numberOf50yen = 1;
-		moneyStock.numberOf100yen = 6;
-		moneyStock.numberOf500yen = 0;
-		moneyStock.numberOf1000yen = 0;
+		moneyStock.numberOf10Yen = 14;
+		moneyStock.numberOf50Yen = 1;
+		moneyStock.numberOf100Yen = 6;
+		moneyStock.numberOf500Yen = 0;
+		moneyStock.numberOf1000Yen = 0;
 		MoneyStockLogic.update(moneyStock);
 		
 		InsertMoney.update(0);
-		InsertMoney.insert1000yen();
+		InsertMoney.insert1000Yen();
 		
 		OtsuriAndGoodsDto actualOtsuriAndGoodsDto = PurchaseGoods.purchase(1);
 		OtsuriAndGoodsDto expectedOtsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		expectedOtsuriAndGoodsDto.goodsId = goodsId;
-		expectedOtsuriAndGoodsDto.numberOf10yen = 13;
-		expectedOtsuriAndGoodsDto.numberOf50yen = 1;
-		expectedOtsuriAndGoodsDto.numberOf100yen = 6;
-		expectedOtsuriAndGoodsDto.numberOf500yen = 0;
-		expectedOtsuriAndGoodsDto.numberOf1000yen = 0;
+		expectedOtsuriAndGoodsDto.numberOf10Yen = 13;
+		expectedOtsuriAndGoodsDto.numberOf50Yen = 1;
+		expectedOtsuriAndGoodsDto.numberOf100Yen = 6;
+		expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
+		expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
 		
 		// おつりと商品が得られる
 		assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
@@ -425,11 +425,11 @@ public class PurchaseGoodsTest {
 		// お金のストックの枚数が変わる
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 0;
-		expectedMoneyStock.numberOf100yen = 0;
-		expectedMoneyStock.numberOf500yen = 0;
-		expectedMoneyStock.numberOf1000yen = 1;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 0;
+		expectedMoneyStock.numberOf100Yen = 0;
+		expectedMoneyStock.numberOf500Yen = 0;
+		expectedMoneyStock.numberOf1000Yen = 1;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		// 商品のストックの個数が減る
@@ -481,20 +481,20 @@ public class PurchaseGoodsTest {
 	}
 	
 	public static void assertMoneyStockEquals(MoneyStock expected, MoneyStock actual) {
-		assertThat(actual.numberOf10yen, is(expected.numberOf10yen));
-		assertThat(actual.numberOf50yen, is(expected.numberOf50yen));
-		assertThat(actual.numberOf100yen, is(expected.numberOf100yen));
-		assertThat(actual.numberOf500yen, is(expected.numberOf500yen));
-		assertThat(actual.numberOf1000yen, is(expected.numberOf1000yen));
+		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
+		assertThat(actual.numberOf50Yen, is(expected.numberOf50Yen));
+		assertThat(actual.numberOf100Yen, is(expected.numberOf100Yen));
+		assertThat(actual.numberOf500Yen, is(expected.numberOf500Yen));
+		assertThat(actual.numberOf1000Yen, is(expected.numberOf1000Yen));
 	}
 	
 	public static void assertOtsuriAndGoodsDtoEquals(OtsuriAndGoodsDto expected, OtsuriAndGoodsDto actual) {
 		assertThat(actual.goodsId, is(expected.goodsId));
-		assertThat(actual.numberOf10yen, is(expected.numberOf10yen));
-		assertThat(actual.numberOf50yen, is(expected.numberOf50yen));
-		assertThat(actual.numberOf100yen, is(expected.numberOf100yen));
-		assertThat(actual.numberOf500yen, is(expected.numberOf500yen));
-		assertThat(actual.numberOf1000yen, is(expected.numberOf1000yen));
+		assertThat(actual.numberOf10Yen, is(expected.numberOf10Yen));
+		assertThat(actual.numberOf50Yen, is(expected.numberOf50Yen));
+		assertThat(actual.numberOf100Yen, is(expected.numberOf100Yen));
+		assertThat(actual.numberOf500Yen, is(expected.numberOf500Yen));
+		assertThat(actual.numberOf1000Yen, is(expected.numberOf1000Yen));
 	}
 	
 	public static void assertGoodsStockMapEquals(Map<String, String> expected, Map<String, String> actual) {

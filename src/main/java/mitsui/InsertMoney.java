@@ -4,53 +4,53 @@ import java.io.File;
 
 public class InsertMoney {
 	
-	public static void insert10yen() throws Exception {
+	public static void insert10Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 10;
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf10yen = moneyStock.numberOf10yen + 1;
+		moneyStock.numberOf10Yen = moneyStock.numberOf10Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	
-	public static void insert50yen() throws Exception {
+	public static void insert50Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 50;
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf50yen = moneyStock.numberOf50yen + 1;
+		moneyStock.numberOf50Yen = moneyStock.numberOf50Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	
-	public static void insert100yen() throws Exception {
+	public static void insert100Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 100;
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf100yen = moneyStock.numberOf100yen + 1;
+		moneyStock.numberOf100Yen = moneyStock.numberOf100Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	
-	public static void insert500yen() throws Exception {
+	public static void insert500Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 500;
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf500yen = moneyStock.numberOf500yen + 1;
+		moneyStock.numberOf500Yen = moneyStock.numberOf500Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	
-	public static void insert1000yen() throws Exception {
+	public static void insert1000Yen() throws Exception {
 		int alreadyInsertedMoney = find();
 		int totalInsertedMoney = alreadyInsertedMoney + 1000;
 		update(totalInsertedMoney);
 		
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf1000yen = moneyStock.numberOf1000yen + 1;
+		moneyStock.numberOf1000Yen = moneyStock.numberOf1000Yen + 1;
 		MoneyStockLogic.update(moneyStock);
 	}
 	

@@ -27,11 +27,11 @@ public class MoneyStockLogic {
 		}
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = Integer.parseInt(moneyStockMap.get("10"));
-		moneyStock.numberOf50yen = Integer.parseInt(moneyStockMap.get("50"));
-		moneyStock.numberOf100yen = Integer.parseInt(moneyStockMap.get("100"));
-		moneyStock.numberOf500yen = Integer.parseInt(moneyStockMap.get("500"));
-		moneyStock.numberOf1000yen = Integer.parseInt(moneyStockMap.get("1000"));
+		moneyStock.numberOf10Yen = Integer.parseInt(moneyStockMap.get("10"));
+		moneyStock.numberOf50Yen = Integer.parseInt(moneyStockMap.get("50"));
+		moneyStock.numberOf100Yen = Integer.parseInt(moneyStockMap.get("100"));
+		moneyStock.numberOf500Yen = Integer.parseInt(moneyStockMap.get("500"));
+		moneyStock.numberOf1000Yen = Integer.parseInt(moneyStockMap.get("1000"));
 		
 		return moneyStock;
 	}
@@ -44,8 +44,8 @@ public class MoneyStockLogic {
 		File vendingMachineMoneyFile = new File(FilePath.MONEY_STOCK_FILE);
 		
 		String header = "10,50,100,500,1000";
-		String data = moneyStock.numberOf10yen + "," + moneyStock.numberOf50yen + "," + moneyStock.numberOf100yen + ","
-				+ moneyStock.numberOf500yen + "," + moneyStock.numberOf1000yen;
+		String data = moneyStock.numberOf10Yen + "," + moneyStock.numberOf50Yen + "," + moneyStock.numberOf100Yen + ","
+				+ moneyStock.numberOf500Yen + "," + moneyStock.numberOf1000Yen;
 		
 		if (!FileUtil.canWriteFile(vendingMachineMoneyFile)) {
 			throw new Exception("ファイルが存在しない、または書き込めません。");
@@ -56,64 +56,64 @@ public class MoneyStockLogic {
 	public static boolean canGiveOtsuri(int otsuriKingaku) throws Exception {
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
 		
-		int favoredNumberOf1000yen = otsuriKingaku / 1000;
-		int otsuriKinkagakuExcept1000yen;
-		if (favoredNumberOf1000yen == 0) {
-			otsuriKinkagakuExcept1000yen = otsuriKingaku;
+		int favoredNumberOf1000Yen = otsuriKingaku / 1000;
+		int otsuriKinkagakuExcept1000Yen;
+		if (favoredNumberOf1000Yen == 0) {
+			otsuriKinkagakuExcept1000Yen = otsuriKingaku;
 		} else {
-			int otsuriNumberOf1000yen;
-			if (favoredNumberOf1000yen <= moneyStock.numberOf1000yen) {
-				otsuriNumberOf1000yen = favoredNumberOf1000yen;
+			int otsuriNumberOf1000Yen;
+			if (favoredNumberOf1000Yen <= moneyStock.numberOf1000Yen) {
+				otsuriNumberOf1000Yen = favoredNumberOf1000Yen;
 			} else {
-				otsuriNumberOf1000yen = moneyStock.numberOf1000yen;
+				otsuriNumberOf1000Yen = moneyStock.numberOf1000Yen;
 			}
-			otsuriKinkagakuExcept1000yen = otsuriKingaku - otsuriNumberOf1000yen * 1000;
+			otsuriKinkagakuExcept1000Yen = otsuriKingaku - otsuriNumberOf1000Yen * 1000;
 		}
 		
-		int favoredNumberOf500yen = otsuriKinkagakuExcept1000yen / 500;
-		int otsuriKingakuExcept500yen;
-		if (favoredNumberOf500yen == 0) {
-			otsuriKingakuExcept500yen = otsuriKinkagakuExcept1000yen;
+		int favoredNumberOf500Yen = otsuriKinkagakuExcept1000Yen / 500;
+		int otsuriKingakuExcept500Yen;
+		if (favoredNumberOf500Yen == 0) {
+			otsuriKingakuExcept500Yen = otsuriKinkagakuExcept1000Yen;
 		} else {
-			int otsuriNumberOf500yen;
-			if (favoredNumberOf500yen <= moneyStock.numberOf500yen) {
-				otsuriNumberOf500yen = favoredNumberOf500yen;
+			int otsuriNumberOf500Yen;
+			if (favoredNumberOf500Yen <= moneyStock.numberOf500Yen) {
+				otsuriNumberOf500Yen = favoredNumberOf500Yen;
 			} else {
-				otsuriNumberOf500yen = moneyStock.numberOf500yen;
+				otsuriNumberOf500Yen = moneyStock.numberOf500Yen;
 			}
-			otsuriKingakuExcept500yen = otsuriKinkagakuExcept1000yen - otsuriNumberOf500yen * 500;
+			otsuriKingakuExcept500Yen = otsuriKinkagakuExcept1000Yen - otsuriNumberOf500Yen * 500;
 		}
 		
-		int favoredNumberOf100yen = otsuriKingakuExcept500yen / 100;
-		int otsuriKingakuExcept100yen;
-		if (favoredNumberOf100yen == 0) {
-			otsuriKingakuExcept100yen = otsuriKingakuExcept500yen;
+		int favoredNumberOf100Yen = otsuriKingakuExcept500Yen / 100;
+		int otsuriKingakuExcept100Yen;
+		if (favoredNumberOf100Yen == 0) {
+			otsuriKingakuExcept100Yen = otsuriKingakuExcept500Yen;
 		} else {
-			int otsuriNumberOf100yen;
-			if (favoredNumberOf100yen <= moneyStock.numberOf100yen) {
-				otsuriNumberOf100yen = favoredNumberOf100yen;
+			int otsuriNumberOf100Yen;
+			if (favoredNumberOf100Yen <= moneyStock.numberOf100Yen) {
+				otsuriNumberOf100Yen = favoredNumberOf100Yen;
 			} else {
-				otsuriNumberOf100yen = moneyStock.numberOf100yen;
+				otsuriNumberOf100Yen = moneyStock.numberOf100Yen;
 			}
-			otsuriKingakuExcept100yen = otsuriKingakuExcept500yen - otsuriNumberOf100yen * 100;
+			otsuriKingakuExcept100Yen = otsuriKingakuExcept500Yen - otsuriNumberOf100Yen * 100;
 		}
 		
-		int favoredNumberOf50yen = otsuriKingakuExcept100yen / 50;
-		int otsuriKingakuExcept50yen;
-		if (favoredNumberOf50yen == 0) {
-			otsuriKingakuExcept50yen = otsuriKingakuExcept100yen;
+		int favoredNumberOf50Yen = otsuriKingakuExcept100Yen / 50;
+		int otsuriKingakuExcept50Yen;
+		if (favoredNumberOf50Yen == 0) {
+			otsuriKingakuExcept50Yen = otsuriKingakuExcept100Yen;
 		} else {
-			int otsuriNumberOf50yen;
-			if (favoredNumberOf50yen <= moneyStock.numberOf50yen) {
-				otsuriNumberOf50yen = favoredNumberOf50yen;
+			int otsuriNumberOf50Yen;
+			if (favoredNumberOf50Yen <= moneyStock.numberOf50Yen) {
+				otsuriNumberOf50Yen = favoredNumberOf50Yen;
 			} else {
-				otsuriNumberOf50yen = moneyStock.numberOf50yen;
+				otsuriNumberOf50Yen = moneyStock.numberOf50Yen;
 			}
-			otsuriKingakuExcept50yen = otsuriKingakuExcept100yen - otsuriNumberOf50yen * 50;
+			otsuriKingakuExcept50Yen = otsuriKingakuExcept100Yen - otsuriNumberOf50Yen * 50;
 		}
 		
-		int favoredNumberOf10yen = otsuriKingakuExcept50yen / 10;
-		if (favoredNumberOf10yen <= moneyStock.numberOf10yen) {
+		int favoredNumberOf10Yen = otsuriKingakuExcept50Yen / 10;
+		if (favoredNumberOf10Yen <= moneyStock.numberOf10Yen) {
 			return true;
 		} else {
 			return false;
@@ -124,59 +124,59 @@ public class MoneyStockLogic {
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
 		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();
 		
-		int favoredNumberOf1000yen = otsuriKingaku / 1000;
-		int otsuriKinkagakuExcept1000yen;
-		if (favoredNumberOf1000yen == 0) {
-			otsuriKinkagakuExcept1000yen = otsuriKingaku;
-			otsuriAndGoodsDto.numberOf1000yen = 0;
-		} else if (favoredNumberOf1000yen <= moneyStock.numberOf1000yen) {
-			otsuriAndGoodsDto.numberOf1000yen = favoredNumberOf1000yen;
-			otsuriKinkagakuExcept1000yen = otsuriKingaku - otsuriAndGoodsDto.numberOf1000yen * 1000;
+		int favoredNumberOf1000Yen = otsuriKingaku / 1000;
+		int otsuriKinkagakuExcept1000Yen;
+		if (favoredNumberOf1000Yen == 0) {
+			otsuriKinkagakuExcept1000Yen = otsuriKingaku;
+			otsuriAndGoodsDto.numberOf1000Yen = 0;
+		} else if (favoredNumberOf1000Yen <= moneyStock.numberOf1000Yen) {
+			otsuriAndGoodsDto.numberOf1000Yen = favoredNumberOf1000Yen;
+			otsuriKinkagakuExcept1000Yen = otsuriKingaku - otsuriAndGoodsDto.numberOf1000Yen * 1000;
 		} else {
-			otsuriAndGoodsDto.numberOf1000yen = moneyStock.numberOf1000yen;
-			otsuriKinkagakuExcept1000yen = otsuriKingaku - otsuriAndGoodsDto.numberOf1000yen * 1000;
+			otsuriAndGoodsDto.numberOf1000Yen = moneyStock.numberOf1000Yen;
+			otsuriKinkagakuExcept1000Yen = otsuriKingaku - otsuriAndGoodsDto.numberOf1000Yen * 1000;
 		}
 		
-		int favoredNumberOf500yen = otsuriKinkagakuExcept1000yen / 500;
-		int otsuriKinkagakuExcept500yen;
-		if (favoredNumberOf500yen == 0) {
-			otsuriKinkagakuExcept500yen = otsuriKinkagakuExcept1000yen;
-			otsuriAndGoodsDto.numberOf500yen = favoredNumberOf500yen;
-		} else if (favoredNumberOf500yen <= moneyStock.numberOf500yen) {
-			otsuriAndGoodsDto.numberOf500yen = favoredNumberOf500yen;
-			otsuriKinkagakuExcept500yen = otsuriKinkagakuExcept1000yen - otsuriAndGoodsDto.numberOf500yen * 500;
+		int favoredNumberOf500Yen = otsuriKinkagakuExcept1000Yen / 500;
+		int otsuriKinkagakuExcept500Yen;
+		if (favoredNumberOf500Yen == 0) {
+			otsuriKinkagakuExcept500Yen = otsuriKinkagakuExcept1000Yen;
+			otsuriAndGoodsDto.numberOf500Yen = favoredNumberOf500Yen;
+		} else if (favoredNumberOf500Yen <= moneyStock.numberOf500Yen) {
+			otsuriAndGoodsDto.numberOf500Yen = favoredNumberOf500Yen;
+			otsuriKinkagakuExcept500Yen = otsuriKinkagakuExcept1000Yen - otsuriAndGoodsDto.numberOf500Yen * 500;
 		} else {
-			otsuriAndGoodsDto.numberOf500yen = moneyStock.numberOf500yen;
-			otsuriKinkagakuExcept500yen = otsuriKinkagakuExcept1000yen - otsuriAndGoodsDto.numberOf500yen * 500;
+			otsuriAndGoodsDto.numberOf500Yen = moneyStock.numberOf500Yen;
+			otsuriKinkagakuExcept500Yen = otsuriKinkagakuExcept1000Yen - otsuriAndGoodsDto.numberOf500Yen * 500;
 		}
 		
-		int favoredNumberOf100yen = otsuriKinkagakuExcept500yen / 100;
-		int otsuriKinkagakuExcept100yen;
-		if (favoredNumberOf100yen == 0) {
-			otsuriKinkagakuExcept100yen = otsuriKinkagakuExcept500yen;
-			otsuriAndGoodsDto.numberOf100yen = favoredNumberOf100yen;
-		} else if (favoredNumberOf100yen <= moneyStock.numberOf100yen) {
-			otsuriAndGoodsDto.numberOf100yen = otsuriKinkagakuExcept500yen / 100;
-			otsuriKinkagakuExcept100yen = otsuriKinkagakuExcept500yen - otsuriAndGoodsDto.numberOf100yen * 100;
+		int favoredNumberOf100Yen = otsuriKinkagakuExcept500Yen / 100;
+		int otsuriKinkagakuExcept100Yen;
+		if (favoredNumberOf100Yen == 0) {
+			otsuriKinkagakuExcept100Yen = otsuriKinkagakuExcept500Yen;
+			otsuriAndGoodsDto.numberOf100Yen = favoredNumberOf100Yen;
+		} else if (favoredNumberOf100Yen <= moneyStock.numberOf100Yen) {
+			otsuriAndGoodsDto.numberOf100Yen = otsuriKinkagakuExcept500Yen / 100;
+			otsuriKinkagakuExcept100Yen = otsuriKinkagakuExcept500Yen - otsuriAndGoodsDto.numberOf100Yen * 100;
 		} else {
-			otsuriAndGoodsDto.numberOf100yen = moneyStock.numberOf100yen;
-			otsuriKinkagakuExcept100yen = otsuriKinkagakuExcept500yen - otsuriAndGoodsDto.numberOf100yen * 100;
+			otsuriAndGoodsDto.numberOf100Yen = moneyStock.numberOf100Yen;
+			otsuriKinkagakuExcept100Yen = otsuriKinkagakuExcept500Yen - otsuriAndGoodsDto.numberOf100Yen * 100;
 		}
 		
-		int favoredNumberOf50yen = otsuriKinkagakuExcept100yen / 50;
-		int otsuriKinkagakuExcept50yen;
-		if (favoredNumberOf50yen == 0) {
-			otsuriKinkagakuExcept50yen = otsuriKinkagakuExcept100yen;
-			otsuriAndGoodsDto.numberOf50yen = favoredNumberOf50yen;
-		} else if (favoredNumberOf50yen <= moneyStock.numberOf50yen) {
-			otsuriAndGoodsDto.numberOf50yen = otsuriKinkagakuExcept100yen / 50;
-			otsuriKinkagakuExcept50yen = otsuriKinkagakuExcept100yen - otsuriAndGoodsDto.numberOf50yen * 50;
+		int favoredNumberOf50Yen = otsuriKinkagakuExcept100Yen / 50;
+		int otsuriKinkagakuExcept50Yen;
+		if (favoredNumberOf50Yen == 0) {
+			otsuriKinkagakuExcept50Yen = otsuriKinkagakuExcept100Yen;
+			otsuriAndGoodsDto.numberOf50Yen = favoredNumberOf50Yen;
+		} else if (favoredNumberOf50Yen <= moneyStock.numberOf50Yen) {
+			otsuriAndGoodsDto.numberOf50Yen = otsuriKinkagakuExcept100Yen / 50;
+			otsuriKinkagakuExcept50Yen = otsuriKinkagakuExcept100Yen - otsuriAndGoodsDto.numberOf50Yen * 50;
 		} else {
-			otsuriAndGoodsDto.numberOf50yen = moneyStock.numberOf50yen;
-			otsuriKinkagakuExcept50yen = otsuriKinkagakuExcept100yen - otsuriAndGoodsDto.numberOf50yen * 50;
+			otsuriAndGoodsDto.numberOf50Yen = moneyStock.numberOf50Yen;
+			otsuriKinkagakuExcept50Yen = otsuriKinkagakuExcept100Yen - otsuriAndGoodsDto.numberOf50Yen * 50;
 		}
 		
-		otsuriAndGoodsDto.numberOf10yen = otsuriKinkagakuExcept50yen / 10;
+		otsuriAndGoodsDto.numberOf10Yen = otsuriKinkagakuExcept50Yen / 10;
 		
 		return otsuriAndGoodsDto;
 	}

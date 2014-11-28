@@ -2,14 +2,14 @@ package mitsui;
 
 public class MoneyStock {
 	
-	public int numberOf10yen;
+	public int numberOf10Yen;
 	
-	public int numberOf50yen;
+	public int numberOf50Yen;
 	
-	public int numberOf100yen;
+	public int numberOf100Yen;
 	
-	public int numberOf500yen;
+	public int numberOf500Yen;
 	
-	public int numberOf1000yen;
+	public int numberOf1000Yen;
 	
 }

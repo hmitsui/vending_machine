@@ -44,11 +44,11 @@ public class PurchaseGoods {
 		
 		// 自動販売機内のお金の枚数が変わる
 		MoneyStock moneyStock = MoneyStockLogic.findAll();
-		moneyStock.numberOf10yen = moneyStock.numberOf10yen - purchaseDto.numberOf10yen;
-		moneyStock.numberOf50yen = moneyStock.numberOf50yen - purchaseDto.numberOf50yen;
-		moneyStock.numberOf100yen = moneyStock.numberOf100yen - purchaseDto.numberOf100yen;
-		moneyStock.numberOf500yen = moneyStock.numberOf500yen - purchaseDto.numberOf500yen;
-		moneyStock.numberOf1000yen = moneyStock.numberOf1000yen - purchaseDto.numberOf1000yen;
+		moneyStock.numberOf10Yen = moneyStock.numberOf10Yen - purchaseDto.numberOf10Yen;
+		moneyStock.numberOf50Yen = moneyStock.numberOf50Yen - purchaseDto.numberOf50Yen;
+		moneyStock.numberOf100Yen = moneyStock.numberOf100Yen - purchaseDto.numberOf100Yen;
+		moneyStock.numberOf500Yen = moneyStock.numberOf500Yen - purchaseDto.numberOf500Yen;
+		moneyStock.numberOf1000Yen = moneyStock.numberOf1000Yen - purchaseDto.numberOf1000Yen;
 		
 		MoneyStockLogic.update(moneyStock);
 		

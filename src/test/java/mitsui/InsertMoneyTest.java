@@ -15,22 +15,22 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert10yen();
+		InsertMoney.insert10Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 2;
-		expectedMoneyStock.numberOf50yen = 3;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 2;
+		expectedMoneyStock.numberOf50Yen = 3;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -46,22 +46,22 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert50yen();
+		InsertMoney.insert50Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 4;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 4;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -76,22 +76,22 @@ public class InsertMoneyTest {
 	public void 百円を投入する() throws Exception {
 		InsertMoney.update(100);
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert100yen();
+		InsertMoney.insert100Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 3;
-		expectedMoneyStock.numberOf100yen = 6;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 3;
+		expectedMoneyStock.numberOf100Yen = 6;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -107,22 +107,22 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert500yen();
+		InsertMoney.insert500Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 3;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 8;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 3;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 8;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -138,22 +138,22 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert1000yen();
+		InsertMoney.insert1000Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 1;
-		expectedMoneyStock.numberOf50yen = 3;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 10;
+		expectedMoneyStock.numberOf10Yen = 1;
+		expectedMoneyStock.numberOf50Yen = 3;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 10;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -169,23 +169,23 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert10yen();
-		InsertMoney.insert10yen();
+		InsertMoney.insert10Yen();
+		InsertMoney.insert10Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 3;
-		expectedMoneyStock.numberOf50yen = 3;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 3;
+		expectedMoneyStock.numberOf50Yen = 3;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -201,23 +201,23 @@ public class InsertMoneyTest {
 		InsertMoney.update(100);
 		
 		MoneyStock moneyStock = new MoneyStock();
-		moneyStock.numberOf10yen = 1;
-		moneyStock.numberOf50yen = 3;
-		moneyStock.numberOf100yen = 5;
-		moneyStock.numberOf500yen = 7;
-		moneyStock.numberOf1000yen = 9;
+		moneyStock.numberOf10Yen = 1;
+		moneyStock.numberOf50Yen = 3;
+		moneyStock.numberOf100Yen = 5;
+		moneyStock.numberOf500Yen = 7;
+		moneyStock.numberOf1000Yen = 9;
 		MoneyStockLogic.update(moneyStock);
 		
-		InsertMoney.insert10yen();
-		InsertMoney.insert50yen();
+		InsertMoney.insert10Yen();
+		InsertMoney.insert50Yen();
 		
 		MoneyStock actualMoneyStock = MoneyStockLogic.findAll();
 		MoneyStock expectedMoneyStock = new MoneyStock();
-		expectedMoneyStock.numberOf10yen = 2;
-		expectedMoneyStock.numberOf50yen = 4;
-		expectedMoneyStock.numberOf100yen = 5;
-		expectedMoneyStock.numberOf500yen = 7;
-		expectedMoneyStock.numberOf1000yen = 9;
+		expectedMoneyStock.numberOf10Yen = 2;
+		expectedMoneyStock.numberOf50Yen = 4;
+		expectedMoneyStock.numberOf100Yen = 5;
+		expectedMoneyStock.numberOf500Yen = 7;
+		expectedMoneyStock.numberOf1000Yen = 9;
 		assertMoneyStockEquals(expectedMoneyStock, actualMoneyStock);
 		
 		int actualInsertedMoney = InsertMoney.find();
@@ -238,10 +238,10 @@ public class InsertMoneyTest {
 	}
 	
 	public static void assertMoneyStockEquals(MoneyStock expectedMoneyStock, MoneyStock actualMoneyStock) {
-		assertThat(actualMoneyStock.numberOf10yen, is(expectedMoneyStock.numberOf10yen));
-		assertThat(actualMoneyStock.numberOf50yen, is(expectedMoneyStock.numberOf50yen));
-		assertThat(actualMoneyStock.numberOf100yen, is(expectedMoneyStock.numberOf100yen));
-		assertThat(actualMoneyStock.numberOf500yen, is(expectedMoneyStock.numberOf500yen));
-		assertThat(actualMoneyStock.numberOf1000yen, is(expectedMoneyStock.numberOf1000yen));
+		assertThat(actualMoneyStock.numberOf10Yen, is(expectedMoneyStock.numberOf10Yen));
+		assertThat(actualMoneyStock.numberOf50Yen, is(expectedMoneyStock.numberOf50Yen));
+		assertThat(actualMoneyStock.numberOf100Yen, is(expectedMoneyStock.numberOf100Yen));
+		assertThat(actualMoneyStock.numberOf500Yen, is(expectedMoneyStock.numberOf500Yen));
+		assertThat(actualMoneyStock.numberOf1000Yen, is(expectedMoneyStock.numberOf1000Yen));
 	}
 }
