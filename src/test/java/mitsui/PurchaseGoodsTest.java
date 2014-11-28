@@ -62,13 +62,14 @@ public class PurchaseGoodsTest {
 		
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(0);
-			expectedOtsuriAndGoodsDto.goodsId = 0;
+		} finally {
+			expectedOtsuriAndGoodsDto.goodsId = null;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
-		} finally {
+			
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
@@ -137,13 +138,14 @@ public class PurchaseGoodsTest {
 		
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
-			expectedOtsuriAndGoodsDto.goodsId = 0;
+		} finally {
+			expectedOtsuriAndGoodsDto.goodsId = null;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
-		} finally {
+			
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
@@ -210,13 +212,14 @@ public class PurchaseGoodsTest {
 		
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
-			expectedOtsuriAndGoodsDto.goodsId = 0;
+		} finally {
+			expectedOtsuriAndGoodsDto.goodsId = null;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
-		} finally {
+			
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
@@ -283,13 +286,14 @@ public class PurchaseGoodsTest {
 		
 		try {
 			actualOtsuriAndGoodsDto = PurchaseGoodsLogic.purchase(1);
-			expectedOtsuriAndGoodsDto.goodsId = 0;
+		} finally {
+			expectedOtsuriAndGoodsDto.goodsId = null;
 			expectedOtsuriAndGoodsDto.numberOf10Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf50Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf100Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf500Yen = 0;
 			expectedOtsuriAndGoodsDto.numberOf1000Yen = 0;
-		} finally {
+			
 			// おつりと商品は得られない
 			assertOtsuriAndGoodsDtoEquals(expectedOtsuriAndGoodsDto, actualOtsuriAndGoodsDto);
 			
