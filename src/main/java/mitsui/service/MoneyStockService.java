@@ -48,12 +48,14 @@ public class MoneyStockService {
 		File vendingMachineMoneyFile = new File(FilePath.MONEY_STOCK_FILE);
 		
 		String header = "10,50,100,500,1000";
-		String data = moneyStock.numberOf10Yen + "," + moneyStock.numberOf50Yen + "," + moneyStock.numberOf100Yen + ","
-				+ moneyStock.numberOf500Yen + "," + moneyStock.numberOf1000Yen;
+		StringBuilder dataBuilder = new StringBuilder();
+		dataBuilder.append(moneyStock.numberOf10Yen).append(",").append(moneyStock.numberOf50Yen).append(",")
+				.append(moneyStock.numberOf100Yen).append(",").append(moneyStock.numberOf500Yen).append(",")
+				.append(moneyStock.numberOf1000Yen);
 		
 		if (!FileUtil.canWriteFile(vendingMachineMoneyFile)) {
 			throw new Exception("ファイルが存在しない、または書き込めません。");
 		}
-		FileUtil.writeFile(vendingMachineMoneyFile, header, data);
+		FileUtil.writeFile(vendingMachineMoneyFile, header, dataBuilder.toString());
 	}
 }

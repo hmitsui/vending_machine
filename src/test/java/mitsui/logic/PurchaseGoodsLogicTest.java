@@ -469,18 +469,22 @@ public class PurchaseGoodsLogicTest {
 		
 		File goodsPriceFile = new File(FilePath.GOODS_PRICE_FILE);
 		
-		String header = "1";
-		String data = goodsPriceMap.get(Integer.toString(1));
+		StringBuilder headerBuilder = new StringBuilder();
+		StringBuilder dataBuilder = new StringBuilder();
+		
+		headerBuilder.append("1");
+		dataBuilder.append(goodsPriceMap.get(Integer.toString(1)));
+		
 		for (int i = 2; i <= goodsPriceMap.size(); i++) {
-			header = header + "," + Integer.toString(i);
-			data = data + "," + goodsPriceMap.get(Integer.toString(i));
+			headerBuilder.append(",").append(Integer.toString(i));
+			dataBuilder.append(",").append(goodsPriceMap.get(Integer.toString(i)));
 		}
 		
 		if (!FileUtil.canWriteFile(goodsPriceFile)) {
 			throw new Exception("ファイルが存在しない、または書き込めません。");
 		}
 		
-		FileUtil.writeFile(goodsPriceFile, header, data);
+		FileUtil.writeFile(goodsPriceFile, headerBuilder.toString(), dataBuilder.toString());
 	}
 	
 	public static void eraseText(String filePath) throws Exception {

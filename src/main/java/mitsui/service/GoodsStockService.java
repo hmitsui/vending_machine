@@ -38,15 +38,19 @@ public class GoodsStockService {
 		
 		File goodsStockFile = new File(FilePath.GODDS_STOCK_FILE);
 		
-		String header = "1";
-		String data = goodsStockMap.get("1");
+		StringBuilder headerBuilder = new StringBuilder();
+		StringBuilder dataBuilder = new StringBuilder();
+		
+		headerBuilder.append("1");
+		dataBuilder.append(goodsStockMap.get("1"));
+		
 		for (int i = 2; i <= goodsStockMap.size(); i++) {
-			header = header + "," + Integer.toString(i);
-			data = data + "," + goodsStockMap.get(Integer.toString(i));
+			headerBuilder.append(",").append(Integer.toString(i));
+			dataBuilder.append(",").append(goodsStockMap.get(Integer.toString(i)));
 		}
 		if (!FileUtil.canWriteFile(goodsStockFile)) {
 			throw new Exception("ファイルが存在しない、または書き込めません。");
 		}
-		FileUtil.writeFile(goodsStockFile, header, data);
+		FileUtil.writeFile(goodsStockFile, headerBuilder.toString(), dataBuilder.toString());
 	}
 }
