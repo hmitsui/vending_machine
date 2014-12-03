@@ -130,6 +130,7 @@ public class PurchaseGoodsLogic {
 		}
 	}
 	
+	// TODO メソッド名がおつりの計算なのに、型が商品を含むものになっている
 	public static OtsuriAndGoodsDto computeNumberOfOtsuri(int otsuriKingaku) throws Exception {
 		MoneyStockEntity moneyStock = MoneyStockService.findAll();
 		OtsuriAndGoodsDto otsuriAndGoodsDto = new OtsuriAndGoodsDto();

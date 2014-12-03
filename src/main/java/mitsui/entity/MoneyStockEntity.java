@@ -1,5 +1,7 @@
 package mitsui.entity;
 
+// TODO numberOfがしつこい
+// プロパティ名の先頭文字は数字は駄目。
 public class MoneyStockEntity {
 	
 	public int numberOf10Yen;
