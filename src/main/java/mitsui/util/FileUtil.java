@@ -85,4 +85,16 @@ public class FileUtil {
 		bufferedWriter.close();
 		fileWriter.close();
 	}
+	
+	public static void writeFile(File file, List<String> strList) throws Exception {
+		FileWriter fileWriter = new FileWriter(file);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		
+		for (String str : strList) {
+			bufferedWriter.write(str);
+			bufferedWriter.newLine();
+		}
+		bufferedWriter.close();
+		fileWriter.close();
+	}
 }
